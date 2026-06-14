@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lynn｜職涯諮詢師 — 把自己活成一道光</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --oat:#F6EFE6;
+    --terracotta:#C98A6B;
+    --blush:#F0D9CE;
+    --sand:#EAE0D2;
+    --ink:#3E3A36;
+    --ink-soft:#6B6259;
+    --cream-card:#FBF7F1;
+    --line:rgba(62,58,54,0.12);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Noto Sans TC','Noto Serif TC',serif;
+    color:var(--ink);
+    background:var(--oat);
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Noto Serif TC',serif;
+    font-weight:700;
+    letter-spacing:0.02em;
+    line-height:1.5;
+  }
+
+  .container{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 6vw;
+  }
+
+  /* ---------- Decorative organic shapes ---------- */
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(2px);
+    z-index:0;
+    pointer-events:none;
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    background:rgba(246,239,230,0.78);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    transition:background .3s;
+  }
+  .nav-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:18px 6vw;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .logo{
+    font-family:'Noto Serif TC',serif;
+    font-weight:700;
+    font-size:1.3rem;
+    letter-spacing:0.15em;
+    color:var(--ink);
+  }
+  .logo span{color:var(--terracotta);}
+  nav ul{
+    display:flex;
+    gap:2.4rem;
+    list-style:none;
+  }
+  nav a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-size:0.95rem;
+    letter-spacing:0.08em;
+    transition:color .25s;
+    position:relative;
+  }
+  nav a:hover, nav a:focus-visible{color:var(--terracotta);}
+  nav a::after{
+    content:'';
+    position:absolute;
+    left:0;bottom:-6px;
+    width:0;height:1px;
+    background:var(--terracotta);
+    transition:width .3s;
+  }
+  nav a:hover::after{width:100%;}
+  .nav-toggle{display:none;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:90px;
+    overflow:hidden;
+  }
+  .hero .blob-1{
+    width:480px;height:480px;
+    background:var(--blush);
+    top:-120px;right:-160px;
+    opacity:.6;
+  }
+  .hero .blob-2{
+    width:320px;height:340px;
+    background:var(--sand);
+    bottom:-100px;left:-120px;
+    opacity:.7;
+    border-radius:42% 58% 65% 35% / 45% 45% 55% 55%;
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    width:100%;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:1.6rem;
+    animation:fadeUp 1.1s ease both;
+  }
+  .hero-eyebrow{
+    font-size:0.95rem;
+    letter-spacing:0.35em;
+    color:var(--terracotta);
+    text-transform:uppercase;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4.4rem);
+    color:var(--ink);
+    max-width:900px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--terracotta);
+    position:relative;
+    display:inline-block;
+  }
+  .hero p.lead{
+    max-width:560px;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    font-weight:300;
+  }
+  .hero-cta{
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:0.6rem;
+  }
+  .btn{
+    display:inline-block;
+    padding:0.95rem 2.4rem;
+    border-radius:50px;
+    text-decoration:none;
+    font-size:0.95rem;
+    letter-spacing:0.08em;
+    transition:transform .3s, box-shadow .3s, background .3s;
+    border:1px solid transparent;
+  }
+  .btn-primary{
+    background:var(--terracotta);
+    color:var(--cream-card);
+    box-shadow:0 8px 24px -8px rgba(201,138,107,0.55);
+  }
+  .btn-primary:hover, .btn-primary:focus-visible{
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px -8px rgba(201,138,107,0.65);
+  }
+  .btn-ghost{
+    border-color:var(--ink);
+    color:var(--ink);
+    background:transparent;
+  }
+  .btn-ghost:hover, .btn-ghost:focus-visible{
+    background:var(--ink);
+    color:var(--cream-card);
+  }
+  .scroll-cue{
+    position:absolute;
+    bottom:32px;left:50%;
+    transform:translateX(-50%);
+    width:1px;height:48px;
+    background:linear-gradient(to bottom, transparent, var(--ink-soft));
+    z-index:2;
+    animation:pulseLine 2.4s ease-in-out infinite;
+  }
+
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(28px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  @keyframes pulseLine{
+    0%,100%{opacity:.2;}
+    50%{opacity:.8;}
+  }
+
+  /* ---------- Section generic ---------- */
+  section{
+    position:relative;
+    padding:7rem 0;
+  }
+  .section-head{
+    text-align:center;
+    max-width:680px;
+    margin:0 auto 4rem;
+  }
+  .section-eyebrow{
+    font-size:0.85rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    margin-bottom:0.9rem;
+    display:block;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+  }
+  .section-head p{
+    margin-top:1.2rem;
+    color:var(--ink-soft);
+    font-weight:300;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(36px);
+    transition:opacity .9s ease, transform .9s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- About ---------- */
+  .about{
+    background:var(--cream-card);
+  }
+  .about .container{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:4.5rem;
+    align-items:center;
+  }
+  .about-portrait{
+    position:relative;
+    aspect-ratio:4/5;
+    border-radius:36px 36px 36px 6px;
+    overflow:hidden;
+    background:linear-gradient(160deg, var(--blush), var(--sand));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 30px 60px -30px rgba(62,58,54,0.25);
+  }
+  .about-portrait svg{width:62%; height:62%; opacity:0.92;}
+  .about-portrait::after{
+    content:'';
+    position:absolute;
+    inset:14px;
+    border:1px solid rgba(255,255,255,0.5);
+    border-radius:30px 30px 30px 4px;
+  }
+  .about-text h2{margin-bottom:1.4rem;}
+  .about-text p{
+    color:var(--ink-soft);
+    margin-bottom:1.1rem;
+    font-weight:300;
+  }
+  .quote-block{
+    margin:1.8rem 0;
+    padding:1.6rem 1.8rem;
+    border-left:2px solid var(--terracotta);
+    background:var(--oat);
+    border-radius:0 18px 18px 0;
+    font-family:'Noto Serif TC',serif;
+    font-size:1.05rem;
+    color:var(--ink);
+  }
+  .credentials{
+    margin-top:2.2rem;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:0.7rem 1.5rem;
+  }
+  .credentials li{
+    list-style:none;
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    padding-left:1.2rem;
+    position:relative;
+  }
+  .credentials li::before{
+    content:'';
+    position:absolute;
+    left:0; top:0.65em;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--terracotta);
+  }
+
+  /* ---------- Service ---------- */
+  .service{
+    background:var(--oat);
+  }
+  .service-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:2.2rem;
+    margin-bottom:3.5rem;
+  }
+  .feature-card{
+    background:var(--cream-card);
+    border-radius:28px;
+    padding:2.4rem 2.2rem;
+    border:1px solid var(--line);
+    transition:transform .4s, box-shadow .4s;
+  }
+  .feature-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 24px 48px -28px rgba(62,58,54,0.25);
+  }
+  .feature-tag{
+    font-size:0.78rem;
+    letter-spacing:0.25em;
+    color:var(--terracotta);
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:0.8rem;
+  }
+  .feature-card h3{
+    font-size:1.25rem;
+    margin-bottom:0.9rem;
+  }
+  .feature-card p{
+    color:var(--ink-soft);
+    font-size:0.95rem;
+    font-weight:300;
+  }
+
+  .pain-points{
+    background:var(--cream-card);
+    border-radius:28px;
+    padding:2.6rem 2.4rem;
+    border:1px solid var(--line);
+  }
+  .pain-points h3{
+    text-align:center;
+    margin-bottom:1.8rem;
+    font-size:1.3rem;
+  }
+  .pain-list{
+    list-style:none;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1rem 2rem;
+  }
+  .pain-list li{
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    font-weight:300;
+    padding-left:1.6rem;
+    position:relative;
+  }
+  .pain-list li::before{
+    content:'~';
+    position:absolute;
+    left:0;
+    color:var(--terracotta);
+    font-weight:700;
+  }
+
+  /* ---------- Process ---------- */
+  .process{
+    background:var(--cream-card);
+  }
+  .process-path{
+    position:relative;
+    margin-top:1rem;
+  }
+  .process-path::before{
+    content:'';
+    position:absolute;
+    left:32px;
+    top:14px;
+    bottom:14px;
+    width:1px;
+    background:linear-gradient(to bottom, var(--terracotta), var(--blush));
+  }
+  .process-step{
+    display:flex;
+    gap:2rem;
+    align-items:flex-start;
+    padding:1.6rem 0;
+  }
+  .process-num{
+    flex:none;
+    width:64px;height:64px;
+    border-radius:50%;
+    background:var(--oat);
+    border:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Noto Serif TC',serif;
+    font-weight:700;
+    color:var(--terracotta);
+    font-size:1.1rem;
+    position:relative;
+    z-index:1;
+  }
+  .process-text h3{
+    font-size:1.15rem;
+    margin-bottom:0.4rem;
+  }
+  .process-text p{
+    color:var(--ink-soft);
+    font-weight:300;
+    font-size:0.95rem;
+    max-width:520px;
+  }
+
+  .deliverables{
+    margin-top:3.5rem;
+    background:var(--oat);
+    border-radius:28px;
+    padding:2.6rem 2.4rem;
+    text-align:center;
+  }
+  .deliverables h3{margin-bottom:1.6rem; font-size:1.2rem;}
+  .deliverables-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.4rem;
+  }
+  .deliverables-grid div{
+    background:var(--cream-card);
+    border-radius:20px;
+    padding:1.6rem 1.2rem;
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+  }
+  .deliverables-grid strong{
+    display:block;
+    font-family:'Noto Serif TC',serif;
+    font-size:1.05rem;
+    color:var(--ink);
+    margin-bottom:0.4rem;
+  }
+
+  /* ---------- Trust / Testimonials ---------- */
+  .trust{
+    background:var(--oat);
+  }
+  .testimonial-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.8rem;
+  }
+  .testimonial{
+    background:var(--cream-card);
+    border-radius:24px;
+    padding:2.2rem;
+    border:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    gap:1.2rem;
+  }
+  .testimonial-mark{
+    font-family:'Noto Serif TC',serif;
+    font-size:2.6rem;
+    color:var(--blush);
+    line-height:0.6;
+  }
+  .testimonial h4{
+    font-size:1.05rem;
+    font-weight:600;
+  }
+  .testimonial p{
+    color:var(--ink-soft);
+    font-size:0.92rem;
+    font-weight:300;
+  }
+  .testimonial-who{
+    font-size:0.85rem;
+    color:var(--terracotta);
+    letter-spacing:0.1em;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact{
+    background:var(--ink);
+    color:var(--oat);
+    text-align:center;
+    overflow:hidden;
+  }
+  .contact .blob-3{
+    width:420px;height:420px;
+    background:var(--terracotta);
+    opacity:.18;
+    top:-180px; left:50%;
+    transform:translateX(-50%);
+  }
+  .contact .section-eyebrow{color:var(--blush);}
+  .contact h2{
+    color:var(--oat);
+    font-size:clamp(1.9rem, 5vw, 3rem);
+    margin-bottom:1.2rem;
+  }
+  .contact p.lead{
+    color:rgba(246,239,230,0.7);
+    max-width:520px;
+    margin:0 auto 2.4rem;
+    font-weight:300;
+  }
+  .contact-cards{
+    display:flex;
+    justify-content:center;
+    gap:1.4rem;
+    flex-wrap:wrap;
+    margin-bottom:3rem;
+  }
+  .contact-card{
+    background:rgba(246,239,230,0.06);
+    border:1px solid rgba(246,239,230,0.18);
+    border-radius:20px;
+    padding:1.6rem 2.2rem;
+    text-decoration:none;
+    color:var(--oat);
+    min-width:220px;
+    transition:background .3s, transform .3s;
+  }
+  .contact-card:hover, .contact-card:focus-visible{
+    background:rgba(246,239,230,0.12);
+    transform:translateY(-4px);
+  }
+  .contact-card span{
+    display:block;
+    font-size:0.8rem;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--blush);
+    margin-bottom:0.5rem;
+  }
+  .contact-card strong{
+    font-family:'Noto Serif TC',serif;
+    font-size:1.15rem;
+    font-weight:500;
+  }
+  footer{
+    border-top:1px solid rgba(246,239,230,0.12);
+    padding-top:2rem;
+    font-size:0.85rem;
+    color:rgba(246,239,230,0.5);
+    letter-spacing:0.1em;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px){
+    .about .container{
+      grid-template-columns:1fr;
+    }
+    .about-portrait{max-width:340px; margin:0 auto;}
+    .service-grid{grid-template-columns:1fr;}
+    .pain-list{grid-template-columns:1fr;}
+    .deliverables-grid{grid-template-columns:1fr;}
+    .testimonial-grid{grid-template-columns:1fr;}
+    nav ul{display:none;}
+  }
+  @media (max-width: 600px){
+    section{padding:4.5rem 0;}
+    .credentials{grid-template-columns:1fr;}
+    .process-step{gap:1.2rem;}
+    .process-num{width:52px;height:52px;font-size:0.95rem;}
+    .process-path::before{left:26px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    .reveal{opacity:1; transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="logo">Lynn <span>·</span> 職涯諮詢</div>
+    <nav aria-label="主選單">
+      <ul>
+        <li><a href="#about">關於我</a></li>
+        <li><a href="#service">服務</a></li>
+        <li><a href="#process">流程</a></li>
+        <li><a href="#trust">心得</a></li>
+        <li><a href="#contact">聯絡</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="container hero-content">
+    <span class="hero-eyebrow">Career Coaching · 職涯陪跑</span>
+    <h1>把自己活成<em>一道光</em>，<br>找回工作的意義與方向</h1>
+    <p class="lead">嗨，我是 Lynn。如果你的工作沒有不好，卻總覺得還可以更好——我想陪你慢慢釐清，找到屬於自己的下一步。</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">預約一對一諮詢</a>
+      <a href="#about" class="btn btn-ghost">認識 Lynn</a>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"></div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-portrait reveal">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="一杯在陽光下的茶與筆記本插圖">
+        <circle cx="100" cy="100" r="78" fill="#FBF7F1" opacity="0.5"/>
+        <ellipse cx="100" cy="150" rx="70" ry="8" fill="#C98A6B" opacity="0.18"/>
+        <rect x="55" y="90" width="90" height="60" rx="10" fill="#FBF7F1" stroke="#C98A6B" stroke-width="1.5"/>
+        <line x1="65" y1="105" x2="135" y2="105" stroke="#EAE0D2" stroke-width="2"/>
+        <line x1="65" y1="118" x2="125" y2="118" stroke="#EAE0D2" stroke-width="2"/>
+        <line x1="65" y1="131" x2="115" y2="131" stroke="#EAE0D2" stroke-width="2"/>
+        <ellipse cx="140" cy="80" rx="22" ry="20" fill="#F0D9CE"/>
+        <rect x="118" y="78" width="44" height="34" rx="6" fill="#FBF7F1" stroke="#C98A6B" stroke-width="1.5"/>
+        <path d="M162 86 q12 0 12 12 q0 12 -12 12" fill="none" stroke="#C98A6B" stroke-width="1.5"/>
+        <path d="M130 70 q3 -8 0 -14" stroke="#C98A6B" stroke-width="1.2" fill="none" opacity="0.6"/>
+        <path d="M140 70 q3 -8 0 -14" stroke="#C98A6B" stroke-width="1.2" fill="none" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="about-text reveal">
+      <span class="section-eyebrow">About Lynn</span>
+      <h2>從迷惘走到陪伴，<br>是我最想分享的旅程</h2>
+      <p>我正在準備 CDA 國際生涯發展諮詢師認證，透過實際的一對一諮詢，完成五次完整循環的專業訓練——也誠摯邀請正在探索方向的你，與我一起走過這段歷程。</p>
+      <p>我一直相信，每個人都值得活出更貼近自己的樣子。也許快樂有很多種方式，而我最想分享的，就是「教練」與「生涯規劃」這兩個工具——它們曾陪我走出職涯低谷，也讓我有機會陪伴近百位夥伴整理方向、看見可能。</p>
+      <div class="quote-block">
+        「把自己活成一道光，因為你不知道，誰會藉著你的光，走出了黑暗。」
+      </div>
+      <ul class="credentials">
+        <li>台大政治系畢業</li>
+        <li>10 年以上管理經驗</li>
+        <li>教練時數 120 小時以上</li>
+        <li>ICF ACTP 結業</li>
+        <li>人生設計卡執行師進階</li>
+        <li>NLP 專業執行師</li>
+        <li>職游諮詢師結業</li>
+        <li>臼井靈氣三階療癒師</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section class="service" id="service">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Who I Help</span>
+      <h2>這些感覺，或許你也正經歷</h2>
+      <p>工作沒有不好，但總覺得還可以更好——如果你也有這些念頭，這裡會是一個安心的開始。</p>
+    </div>
+
+    <div class="pain-points reveal">
+      <h3>你是不是也曾這樣想過？</h3>
+      <ul class="pain-list">
+        <li>工作沒有不好，但總覺得還可以更好</li>
+        <li>感到焦慮和困惑，不知道該往哪裡去</li>
+        <li>不斷換工作，卻似乎離理想越來越遠</li>
+        <li>已經有些想法，但猶豫是否該做選擇</li>
+        <li>喜歡自我探索，期待未來有更多可能性</li>
+      </ul>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:5rem;">
+      <span class="section-eyebrow">My Approach</span>
+      <h2>陪你走這段路的，是這樣的我</h2>
+    </div>
+
+    <div class="service-grid">
+      <div class="feature-card reveal">
+        <span class="feature-tag">Multiple Skill Sets</span>
+        <h3>全方位職場視角</h3>
+        <p>從前線管理的實戰汗水、總部幕僚的策略思維，到教育訓練的培育溫暖——管理足跡從台北到屏東，理解不同背景、不同地區職場人的真實處境，用最接地氣的語言陪你找出天賦的樂趣。</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-tag">Cross Industry</span>
+        <h3>超跳躍跨界思維</h3>
+        <p>從口紅到機車的產業跨度，從本土企業到外商公司的體制碰撞——這樣的跨界大腦，讓我能帶給你真正多元的工作經驗交流，提供打破框架、跳脫單一產業迷思的精準視角。</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-tag">Coach Style</span>
+        <h3>理感兼具的陪伴</h3>
+        <p>持續充實職涯諮詢與心理學知識，並以取得 ICF ACC 國際教練認證為目標。理性時，幫你做職涯解構與盲點分析；溫暖時，承接你的情緒——為你帶來釐清方向的能量，與內心深處的療癒。</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-tag">Be Balance</span>
+        <h3>內在平衡的引導</h3>
+        <p>學習瑜伽與正念，也是一名靈氣療癒師。我也曾深深迷惘過，正因為走過那段幽谷，更能接納與同理你的卡關——唯有先穩定了自身，才能真正療癒他人。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">The Journey</span>
+      <h2>一對一職涯諮詢・長期陪跑</h2>
+      <p>透過五次完整循環的諮詢，慢慢釐清自我、探索方向，並擬定屬於你自己的行動計畫。</p>
+    </div>
+
+    <div class="process-path">
+      <div class="process-step reveal">
+        <div class="process-num">01</div>
+        <div class="process-text">
+          <h3>初次會談・建立關係</h3>
+          <p>先聊聊你目前的處境與感受，沒有壓力地說出你的卡關與期待，一起建立彼此信任的諮詢空間。</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num">02</div>
+        <div class="process-text">
+          <h3>自我探索・盲點解構</h3>
+          <p>運用教練式提問與職涯工具，理性梳理你的優勢、價值觀與限制，同時溫柔接住情緒上的起伏。</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num">03</div>
+        <div class="process-text">
+          <h3>方向探索・釐清可能性</h3>
+          <p>從多元產業經驗出發，協助你打開視野，看見原本沒想過的選項與組合方式。</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num">04</div>
+        <div class="process-text">
+          <h3>行動計畫・內外平衡</h3>
+          <p>將想法落地成具體的行動步驟，同時關照身心狀態，找到穩定且可持續的節奏。</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="process-num">05</div>
+        <div class="process-text">
+          <h3>回顧整合・展望未來</h3>
+          <p>回顧五次歷程的收穫與轉變，整理出屬於你自己的方向與下一步，帶著清晰與安心繼續前行。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliverables reveal">
+      <h3>完成這段旅程，你會帶走</h3>
+      <div class="deliverables-grid">
+        <div><strong>五次完整諮詢</strong>一對一、長期陪跑的深度對話</div>
+        <div><strong>釐清與探索</strong>看清自我、探索方向、擬定行動計畫</div>
+        <div><strong>完整體驗</strong>感受職涯諮詢的完整歷程</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust" id="trust">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Voices</span>
+      <h2>來自夥伴們的真實分享</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial reveal">
+        <div class="testimonial-mark">"</div>
+        <h4>講著講著，盲點與成見就這樣解開了</h4>
+        <p>透過對談能釐清問題或關卡，有些事情談著談著，會發現原來是自己的成見。而一旦發現後，後續的思考就有了更多選項。</p>
+        <span class="testimonial-who">— 個案 A</span>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial-mark">"</div>
+        <h4>過程像泡泡，最後一切都通透清明</h4>
+        <p>諮詢的過程就像不斷產出一個一個的泡泡，一次一次的產生新的漣漪和關聯，最後一切都通透清明！</p>
+        <span class="testimonial-who">— 個案 B</span>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial-mark">"</div>
+        <h4>重新看見職涯的無限可能</h4>
+        <p>讓我知道，在職涯發展中我還是有很多的可能性。找到自己的內在三角，依舊可以發光發熱！</p>
+        <span class="testimonial-who">— 個案 C</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="blob blob-3"></div>
+  <div class="container">
+    <span class="section-eyebrow">Let's Talk</span>
+    <h2>準備好，與自己對話了嗎？</h2>
+    <p class="lead">如果你也想透過五次完整的諮詢，釐清自我、探索方向、擬定行動計畫——歡迎與我聯繫，一起開始這段旅程。</p>
+    <div class="contact-cards">
+      <a class="contact-card" href="mailto:lynn102205@gmail.com">
+        <span>Email</span>
+        <strong>lynn102205@gmail.com</strong>
+      </a>
+      <a class="contact-card" href="#" onclick="return false;">
+        <span>LINE ID</span>
+        <strong>kkchen22</strong>
+      </a>
+    </div>
+    <footer>
+      © <span id="year"></span> Lynn · Career Coaching. 把自己活成一道光。
+    </footer>
+  </div>
+</section>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  reveals.forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>
