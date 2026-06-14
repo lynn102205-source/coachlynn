@@ -114,6 +114,14 @@
     padding-top:90px;
     overflow:hidden;
   }
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    background:url('hero-photo.jpg') center/cover no-repeat;
+    opacity:0.22;
+    filter:saturate(0.95) brightness(0.95);
+    z-index:-1;
+  }
   .hero .blob-1{
     width:480px;height:480px;
     background:var(--blush);
@@ -621,6 +629,7 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <div class="container hero-content">
