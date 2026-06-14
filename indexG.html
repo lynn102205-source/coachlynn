@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lynn 職涯諮詢 | 把生活活成更有光的樣子</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lineal&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-cream: #F9F6F0;       /* 暖燕麥奶色背景 */
+            --bg-sand: #EFEAE2;        /* 沙灘米色 */
+            --primary-clay: #C28C75;   /* 溫柔陶土色 */
+            --accent-pink: #E8D7D0;    /* 裸粉色 */
+            --text-charcoal: #333333;  /* 沉靜炭灰色文字 */
+            --text-muted: #666666;
+            --white: #FFFFFF;
+            --font-serif: 'Noto Serif TC', serif;
+            --font-sans: 'Noto Sans TC', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* 全域重設與基礎樣式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-charcoal);
+            font-family: var(--font-sans);
+            font-weight: 300;
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+            overflow-x: hidden;
+        }
+
+        /* 標題與字型規範 */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--text-charcoal);
+            line-height: 1.4;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* UX 留白設計：大區塊間距 */
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        /* 按鈕與互動式設計 */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background-color: var(--primary-clay);
+            color: var(--white);
+            border: 1px solid var(--primary-clay);
+            border-radius: 50px;
+            font-family: var(--font-sans);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(194, 140, 117, 0.15);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary-clay);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(194, 140, 117, 0.25);
+        }
+
+        /* 頂部導覽列 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(249, 246, 240, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(232, 215, 208, 0.4);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            padding: 0 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            color: var(--primary-clay);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--primary-clay);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* --- 1. Hero 區塊 --- */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            background: linear-gradient(145deg, var(--bg-cream) 60%, var(--accent-pink) 100%);
+            overflow: hidden;
+        }
+
+        .hero-wrapper {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: var(--primary-clay);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-subtitle::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 1px;
+            background-color: var(--primary-clay);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            font-weight: 900;
+        }
+
+        .hero-title span {
+            display: block;
+            font-size: 1.5rem;
+            font-family: var(--font-sans);
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .hero-quote {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            border-left: 2px solid var(--accent-pink);
+            padding-left: 1.5rem;
+            margin-bottom: 2.5rem;
+            font-style: italic;
+        }
+
+        /* 幾何美學有機線條插圖（純 CSS 代替圖片） */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .organic-shape {
+            width: 320px;
+            height: 400px;
+            background-color: var(--bg-sand);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph 8s ease-in-out infinite both alternate;
+            position: relative;
+            box-shadow: inset 0 0 50px rgba(232, 215, 208, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .organic-inner {
+            width: 80%;
+            height: 80%;
+            border: 1px dashed var(--primary-clay);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 55%;
+            animation: morph 10s ease-in-out infinite both alternate-reverse;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-clay);
+        }
+
+        /* --- 2. About 區塊 --- */
+        #about {
+            background-color: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+        }
+
+        .about-left {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .section-tag {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--primary-clay);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-clay);
+        }
+
+        .profile-card {
+            background-color: var(--bg-cream);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid var(--accent-pink);
+        }
+
+        .profile-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card .subtitle {
+            color: var(--primary-clay);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .bio-text p {
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            text-align: justify;
+        }
+
+        .highlight-box {
+            background-color: var(--bg-sand);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary-clay);
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .timeline-title, .skills-title {
+            font-size: 1.4rem;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--primary-clay);
+        }
+
+        .timeline {
+            list-style: none;
+            padding-left: 1rem;
+            border-left: 1px solid var(--accent-pink);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -21px;
+            top: 8px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: var(--primary-clay);
+            border: 2px solid var(--white);
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background-color: var(--bg-cream);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: var(--text-charcoal);
+            border: 1px solid rgba(194, 140, 117, 0.2);
+        }
+
+        /* --- 3. Service 區塊 --- */
+        #service {
+            background-color: var(--bg-cream);
+        }
+
+        .pain-points-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .pain-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(232, 215, 208, 0.3);
+            transition: var(--transition);
+        }
+
+        .pain-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-clay);
+        }
+
+        .pain-icon {
+            color: var(--primary-clay);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .features-intro {
+            text-align: center;
+            margin-top: 6rem;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 3.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(232, 215, 208, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .feature-header h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-charcoal);
+        }
+
+        .feature-en {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--primary-clay);
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-diff {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed var(--accent-pink);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .feature-diff strong {
+            color: var(--primary-clay);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-serif);
+        }
+
+        /* --- 4. Process 區塊 --- */
+        #process {
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .process-flow {
+            max-width: 900px;
+            margin: 4rem auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            position: relative;
+        }
+
+        .process-step {
+            background: var(--bg-cream);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-num {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-pink);
+            line-height: 1;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- 5. Trust 區塊 --- */
+        #trust {
+            background-color: var(--bg-sand);
+            overflow: hidden;
+        }
+
+        .testimonial-slider {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.01);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .testimonial-content {
+            font-size: 1.05rem;
+            color: var(--text-charcoal);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .testimonial-author {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--primary-clay);
+            border-top: 1px solid var(--bg-cream);
+            padding-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* --- 6. Contact 區塊 --- */
+        #contact {
+            background: linear-gradient(180deg, var(--bg-cream) 0%, var(--accent-pink) 100%);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+        }
+
+        .info-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-link svg {
+            color: var(--primary-clay);
+            width: 24px;
+            height: 24px;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 3.5rem;
+            border-radius: 24px;
+            box-shadow: 0 15px 45px rgba(194, 140, 117, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-charcoal);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--bg-sand);
+            background-color: var(--bg-cream);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--text-charcoal);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-clay);
+            background-color: var(--white);
+        }
+
+        /* 頁尾 */
+        footer {
+            background-color: var(--text-charcoal);
+            color: rgba(255,255,255,0.6);
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* 動態關鍵影格：有機形狀蠕動效果 */
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 45% 55% 50% 50% / 50% 60% 40% 55%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        /* RWD 響應式斷點優化 */
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 2.8rem; }
+            .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+            .about-left { position: relative; top: 0; }
+            .features-grid { grid-template-columns: 1fr; }
+            .process-flow, .testimonial-slider { grid-template-columns: 1fr; gap: 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 5rem 0; }
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--bg-cream);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            .nav-menu.active { left: 0; }
+            .burger { display: block; }
+            .hero-wrapper { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+            .hero-subtitle { justify-content: center; }
+            .hero-subtitle::before { display: none; }
+            .hero-quote { border-left: none; border-top: 1px solid var(--accent-pink); border-bottom: 1px solid var(--accent-pink); padding: 1rem 0; }
+            .contact-form { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">LYNN</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#about" class="nav-link">關於我</a></li>
+                <li><a href="#service" class="nav-link">痛點與特色</a></li>
+                <li><a href="#process" class="nav-link">諮詢流程</a></li>
+                <li><a href="#trust" class="nav-link">真實學員推薦</a></li>
+                <li><a href="#contact" class="nav-link">預約諮詢</a></li>
+            </ul>
+            <div class="burger" id="burgerMenu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </div>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container hero-wrapper">
+            <div class="hero-content">
+                <div class="hero-subtitle">職涯諮詢師 ｜ CDA 國際生涯發展諮詢師培訓中</div>
+                <h1 class="hero-title">
+                    把自己活成一道光，<br>你值得更貼近自己的樣子。
+                    <span>陪你走過迷惘，看見職涯的無限可能</span>
+                </h1>
+                <blockquote class="hero-quote">
+                    「把自己活成一道光，因為你不知道，誰會藉著你的光，走出了黑暗。」
+                </blockquote>
+                <a href="#contact" class="btn">預約真實自我探索之旅</a>
+            </div>
+            <div class="hero-visual">
+                <div class="organic-shape">
+                    <div class="organic-inner">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container about-grid">
+            <div class="about-left">
+                <div class="section-tag">About Lynn</div>
+                <h2 class="section-title">傾聽你，<br>也曾走過迷惘的教練</h2>
+                <div class="profile-card">
+                    <h3>Lynn</h3>
+                    <div class="subtitle">職涯教練 / 靈氣療癒師</div>
+                    <p><strong>人生使命：</strong>用創意和善良來點亮世界。</p>
+                    <p>快樂有很多種方式，而我最想分享的，就是「教練」與「生涯規劃」這兩個工具。它們曾幫我走出低谷，也讓我陪伴了近百位夥伴整理方向。</p>
+                </div>
+            </div>
+            <div class="about-right">
+                <div class="bio-text">
+                    <p>Hi，我是職涯教練 Lynn。我正在準備 CDA 認證，也就是國際生涯發展諮詢師，這是一項全球重要的生涯培訓認證，而我正在透過實際諮詢，完成五次完整循環的專業訓練。</p>
+                    <p>我一直相信，每個人都值得活出更貼近自己的樣子。而我想邀請正在探索生涯、對自己人生有些疑問的你，和我一起走過這段諮詢歷程。這不只是一次練習，也是一次真實的自我探索。</p>
+                    <div class="highlight-box">
+                        當一個人先穩定自己、理解自己、照顧自己，才更有機會去療癒他人、陪伴他人。
+                    </div>
+                </div>
+
+                <h3 class="timeline-title">專業背景 (Background)</h3>
+                <ul class="timeline">
+                    <li class="timeline-item">台大政治系畢業</li>
+                    <li class="timeline-item">擁有 10 年以上管理經驗</li>
+                    <li class="timeline-item">全球 500 大美妝品牌培訓經理</li>
+                    <li class="timeline-item">本土新創電動機車區域經理與專案管理</li>
+                    <li class="timeline-item">精品代理商教育訓練與講師</li>
+                    <li class="timeline-item">日系服飾品牌店長</li>
+                </ul>
+
+                <h3 class="skills-title">專業認證與工具 (Skills)</h3>
+                <div class="skills-tags">
+                    <span class="skill-tag">教練時數 120 小時以上</span>
+                    <span class="skill-tag">ICF 國際教練聯盟 ACTP 結業</span>
+                    <span class="skill-tag">人生設計卡執行師進階結業</span>
+                    <span class="skill-tag">職游諮詢師結業</span>
+                    <span class="skill-tag">愛情設計卡培訓結業</span>
+                    <span class="skill-tag">NLP 專業執行師</span>
+                    <span class="skill-tag">臼井靈氣三階／靈氣療癒師</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="service">
+        <div class="container">
+            <div class="pain-points-intro">
+                <div class="section-tag">Your Dilemma</div>
+                <h2 class="section-title" style="display:inline-block;">你是否也正經歷這些反覆的內心拉扯？</h2>
+            </div>
+            
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <div class="pain-icon">01</div>
+                    <p>工作沒有不好，但總覺得還可以更好，提不起熱情。</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">02</div>
+                    <p>感到焦慮和困惑，每天都在自問究竟該往哪裡去？</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">03</div>
+                    <p>不斷換工作，卻似乎離理想的生活狀態越來越遠。</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">04</div>
+                    <p>心裡已經有些想法，但卡在原地、猶豫是否該做出選擇。</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">05</div>
+                    <p>喜歡自我探索，期待未來人生能有更多閃光的可能性。</p>
+                </div>
+            </div>
+
+            <div class="features-intro">
+                <div class="section-tag">Why Lynn</div>
+                <h2 class="section-title" style="display:inline-block;">理性與感性兼具的獨特諮詢風格</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <h4>1. 全方位職場視角</h4>
+                        <span class="feature-en">Multiple Skill Sets</span>
+                        <p>我的職涯深刻烙印著「前線管理」的實戰汗水、「總部幕僚」的策略思維，以及「教育訓練」的培育溫暖。我不是只待在單一職能的顧問。</p>
+                    </div>
+                    <div class="feature-diff">
+                        <strong>與他人不同之處：</strong>
+                        我的管理足跡「從台北到屏東」。這代表我極度理解不同背景、不同地區職場人的真實處境，能用最接地氣、最懂你的語言，幫你找出發揮天賦的樂趣。
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <h4>2. 超跳躍跨界思維</h4>
+                        <span class="feature-en">Cross Industry</span>
+                        <p>我的工作經驗橫跨截然不同的產業文化，經歷過「從口紅到機車」的極大產業跨度，也體驗過「從本土企業到外商公司」的體制碰撞。</p>
+                    </div>
+                    <div class="feature-diff">
+                        <strong>與他人不同之處：</strong>
+                        這種高適應力的「跨界大腦」，讓我能帶給你真正多元且真實的視角。不論你想在傳統體制內向上突破，還是想跨領域轉職，我都能提供打破框架的精準分析。
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <h4>3. 理感兼具的陪伴</h4>
+                        <span class="feature-en">Coach Style</span>
+                        <p>持續充實職涯諮詢與心理學知識，並深入學習專業的「教練式領導」，以取得 ICF ACC 國際教練認證為前進目標。</p>
+                    </div>
+                    <div class="feature-diff">
+                        <strong>與他人不同之處：</strong>
+                        在諮詢時，我既能拿起放大鏡幫你做理性的職涯解構與盲點分析，也能帶著溫暖的同理心承接你的情緒。為你帶來釐清方向的「能量」，同時給予內心最深刻的「療癒」。
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <h4>4. 內在平衡的引導</h4>
+                        <span class="feature-en">Be Balance</span>
+                        <p>在追求職場成就的同時，我深諳身心平衡的重要。我學習瑜伽與正念，同時也是一名「靈氣療癒師」。</p>
+                    </div>
+                    <div class="feature-diff">
+                        <strong>與他人不同之處：</strong>
+                        我也曾深深迷惘過，正因走過幽谷，我比任何人都更能接納你的卡關。我堅信「唯有先穩定了自身，才能真正療癒他人」。在這裡，我們不只聊工作，更聊如何活出一個安穩、平衡的理想生活。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process">
+        <div class="container">
+            <div class="section-tag">The Journey</div>
+            <h2 class="section-title" style="display:inline-block;">陪伴型一對一諮詢方案</h2>
+            <p style="color:var(--text-muted); margin-top:1rem;">在這個專案中，你將獲得完整的職涯探索體驗</p>
+
+            <div class="process-flow">
+                <div class="process-step">
+                    <span class="step-num">5</span>
+                    <h3 class="step-title">次完整諮詢</h3>
+                    <p class="step-desc">深度的對話空間，讓每一次的探討都有時間沉澱與發酵。</p>
+                </div>
+                <div class="process-step">
+                    <span class="step-num">3</span>
+                    <h3 class="step-title">核心聚焦步驟</h3>
+                    <p class="step-desc">協助你釐清自我、探索未來方向、並共同擬定具體的行動計畫。</p>
+                </div>
+                <div class="process-step">
+                    <span class="step-num">1</span>
+                    <h3 class="step-title">完整體驗過程</h3>
+                    <p class="step-desc">從頭到尾體驗標準化且充滿溫度的國際生涯發展諮詢完整專業歷程。</p>
+                </div>
+            </div>
+
+            <a href="#contact" class="btn">給自己一次改變的機會</a>
+        </div>
+    </section>
+
+    <section id="trust">
+        <div class="container">
+            <div class="section-tag">Testimonials</div>
+            <h2 class="section-title" style="display:inline-block;">解開盲點後的通透清明</h2>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <p class="testimonial-content">「透過對談能釐清問題或關卡，有些事情談著談著，會發現原來是自己的成見。而一旦發現後，後續的思考就有了更多選項。」</p>
+                    <div class="testimonial-author">個案 A ｜ 上班族</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">「諮詢的過程就像不斷產出一個一個的泡泡，一次一次的產生新的漣漪和關聯，最後一切都通透清明！」</p>
+                    <div class="testimonial-author">個案 B ｜ 跨界探索者</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">「謝謝諮詢師讓我知道，在職涯發展中我還是有很多的可能性。找到自己的內在三角，依舊可以發光發熱！」</p>
+                    <div class="testimonial-author">個案 C ｜ 職場轉職者</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container contact-grid">
+            <div>
+                <div class="section-tag">Contact & Connect</div>
+                <h2 class="section-title">與 Lynn 聊聊</h2>
+                <p style="margin-bottom: 3rem; color:var(--text-muted)">期待遇見那個渴望改變、渴望活得更真實的你。請填寫右側表單，或是直接透過以下方式與我聯絡：</p>
+                
+                <div class="info-link">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <span>lynn102205@gmail.com</span>
+                </div>
+                <div class="info-link">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                    <span>LINE ID: kkchen22</span>
+                </div>
+            </div>
+
+            <div>
+                <form class="contact-form" id="consultationForm">
+                    <div class="form-group">
+                        <label class="form-label">妳的名字 / 稱呼</label>
+                        <input type="text" class="form-control" id="name" required placeholder="如何稱呼妳？">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">電子信箱</label>
+                        <input type="email" class="form-control" id="email" required placeholder="Lynn 會透過信箱與妳聯繫">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">目前職場上面臨最大的困惑或痛點</label>
+                        <textarea class="form-control" id="message" rows="4" placeholder="例如：工作沒有不好，但總覺得卡卡的..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%">送出預約申請</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Lynn Career Coach. All Rights Reserved. 把生活活成更有光的樣子</p>
+        </div>
+    </footer>
+
+    <script>
+        // 行動版導覽列切換
+        const burgerMenu = document.getElementById('burgerMenu');
+        const navMenu = document.getElementById('navMenu');
+
+        burgerMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // 點擊導覽連結後自動關閉行動選單
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // 表單提交提示互動 (UX 體驗優化)
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            alert(`謝謝妳，${name}。Lynn 已收到妳的預約探索訊息，將會盡快透過 Email 回覆妳，請留意信箱。`);
+            this.reset();
+        });
+    </script>
+</body>
+</html>
